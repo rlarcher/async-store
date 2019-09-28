@@ -6,7 +6,7 @@ import AsyncStoreParams from './AsyncStoreParams';
 interface AsyncStore {
   initialize: (callback: (err?: any) => void, params?: AsyncStoreParams) => void;
   set: (properties: any) => void;
-  get: (key: string) => any;
+  get: (key: string, short?: boolean) => any;
   find: (key: string) => any;
   isInitialized: () => boolean;
   getId: () => string | undefined;

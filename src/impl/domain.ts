@@ -102,11 +102,13 @@ export function set(properties: any) {
 /**
  * Get a value by a key from the store.
  * Throws an error if anything fails while getting the value.
+ * Returns shortId if passed short flag
  *
  * @param {string} key
+ * @param {boolean} short
  * @returns {*}
  */
-export function get(key: string): any {
+export function get(key: string, short: boolean = false): any {
   const store = getStore();
 
   if (!store) {
@@ -114,6 +116,10 @@ export function get(key: string): any {
   }
 
   logDomain(`Value of ${key} in the domain store =`, store[key]);
+
+  if (short) {
+    return (store[key] || '').substring(0, 8);
+  }
 
   return store[key];
 }

@@ -128,12 +128,13 @@ export function set(properties: any) {
  * Get a value by a key from the store.
  *
  * @param {string} key
+ * @param {boolean} short
  * @returns {*}
  */
-export function get(key: string): any {
+export function get(key: string, short: boolean = false): any {
   coreLog(`Getting ${key} from the store`);
 
-  return initializedAdapter && getInstance(initializedAdapter).get(key);
+  return initializedAdapter && getInstance(initializedAdapter).get(key, short);
 }
 
 /**

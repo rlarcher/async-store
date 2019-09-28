@@ -5,6 +5,7 @@ import * as domain from 'domain';
 import * as globalStore from '../src';
 import { STORE_KEY } from '../src/StoreDomain';
 import AsyncStoreAdapter from '../src/AsyncStoreAdapter';
+import { v4 as uuid } from 'uuid';
 
 describe('store: [adapter=DOMAIN]', () => {
   const adapter = AsyncStoreAdapter.DOMAIN;
@@ -72,6 +73,17 @@ describe('store: [adapter=DOMAIN]', () => {
       expect(globalStore.getId()).to.equal(undefined);
 
       done();
+    });
+
+    it('should return first 8 characters of id if short flag passed', done => {
+      const callback = () => {
+        globalStore.set({ reqId: uuid() });
+        expect(globalStore.get('reqId', true).length).to.equal(8);
+
+        done();
+      };
+
+      globalStore.initialize(adapter)(callback);
     });
   });
 
